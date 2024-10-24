@@ -1,40 +1,24 @@
-# Welcome to Remix!
+Setup demonstrating the React Select bug with Remix https://github.com/JedWatson/react-select/issues/5937 (Firefox, with Bitwarden extension)
 
-- 📖 [Remix docs](https://remix.run/docs)
+## See bug
 
-## Development
+run `npm install` and `npm run dev`. On Firefox, with Bitwarden extension enabled, you should see React Select displaying weirdly, as if styles aren't applied.
 
-Run the dev server:
+Working:
+<img width="2344" alt="Screenshot 2024-10-24 at 17 08 10-expected" src="https://github.com/user-attachments/assets/fb978b20-ba35-4157-8c76-c312499d07fc">
 
-```shellscript
-npm run dev
+Not working:
+<img width="2341" alt="Screenshot 2024-10-24 at 17 08 19-unexpected" src="https://github.com/user-attachments/assets/fc5f5116-3282-42ca-ada4-25da3c3fb263">
+
+## Setup
+
+I just did this:
+
+```
+npx create-remix@latest --template remix-run/remix/templates/express
 ```
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
+and installed React Select:
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
+npm install react-select
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
