@@ -1,40 +1,26 @@
-# Welcome to Remix!
+Shows React Select failing to render properly when re-rendering the `<head>` tag (or its parent, `<html>`).
 
-- 📖 [Remix docs](https://remix.run/docs)
+Unfortunately, re-rendering the `<head>` tag is not uncommon and can happen for reasons independent from your app.
+For instance, a browser extension (e.g. Bitwarden) can cause hydratation to fail: The browser console shows `Uncaught Error: There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering` and renders the whole page again, which triggers the above-mentioned issue.
 
-## Development
+## See bug
 
-Run the dev server:
+- run `npm install` and `npm run dev`.
+- Either click the button
+- Or, on Firefox, with Bitwarden extension enabled, it should also cause the problem.
 
-```shellscript
-npm run dev
+## Setup
+
+The setup is the simplest possible:
+
+Bootstrap Remix:
+```
+npx create-remix@latest
 ```
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
+Install React Select:
+```
+npm install react-select
 ```
 
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+(I also testes with the classic compiler, it does the same.)
