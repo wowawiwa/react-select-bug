@@ -8,6 +8,7 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { useState } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,15 +24,23 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [forceRerenderKey, setForceRerenderKey] = useState(0);
+  const triggerRerender = () => {
+    setForceRerenderKey((prev) => prev + 1);
+  };
+
   return (
     <html lang="en">
-      <head>
+      <head key={forceRerenderKey}>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
+        <button type="button" onClick={triggerRerender} disabled={forceRerenderKey > 0}>
+        {forceRerenderKey === 0 ? "Click here to re-render <head> and see React Multiselect fail to render normally" : "<head> got re-rendered and now React Multiselect fails to display normally"}
+        </button>
         {children}
         <ScrollRestoration />
         <Scripts />
